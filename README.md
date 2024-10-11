@@ -1,6 +1,7 @@
 # JavaTalks
 
-### Deployed Link ``` https://jacebook-app-latest-erwi.onrender.com/```
+#### [Click here to see app deployed ](https://jacebook-app-latest-erwi.onrender.com/)
+
 
 This project is a social networking web application built with **Java** and **Spring Boot**, allowing users to interact through posts, comments, and likes. It is designed to manage user sessions and provide a user-friendly interface for engaging with content.
 
