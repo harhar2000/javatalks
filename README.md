@@ -13,7 +13,7 @@ This project is a social networking web application built with **Java** and **Sp
 - **Likes**: Users can like posts.
 - **Navigation**: Simple navigation for users to browse different sections of the app.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kE_oiVagY6s?si=_Pod3GO9qohLq6eB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/kE_oiVagY6s/0.jpg)](https://www.youtube.com/embed/kE_oiVagY6s?si=_Pod3GO9qohLq6eB)
 
 
 ## Project Structure
