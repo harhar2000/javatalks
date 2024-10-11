@@ -13,9 +13,6 @@ This project is a social networking web application built with **Java** and **Sp
 - **Likes**: Users can like posts.
 - **Navigation**: Simple navigation for users to browse different sections of the app.
 
-[![Watch the video](https://img.youtube.com/vi/kE_oiVagY6s/0.jpg)](https://www.youtube.com/embed/kE_oiVagY6s?si=_Pod3GO9qohLq6eB)
-
-
 ## Project Structure
 
 The project follows a typical Java Spring Boot structure. Below is an overview of the main directories and files:
