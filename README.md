@@ -5,9 +5,8 @@
 
 ### Demo Video
 
-<video width="640" height="360" controls>
-  <source src="https://drive.google.com/uc?export=download&id=1iViuvRe4tUNPnAN24T9s4NG0zUlwCdzN" type="video/mp4">
-</video>
+<iframe src="https://drive.google.com/uc?export=download&id=1vk7H8ELNJt_RngW5tjKKBTsHPq269o1W" width="640" height="480" allow="autoplay"></iframe>
+
 
 
 
