@@ -3,6 +3,15 @@
 #### [Click here to see app deployed ](https://jacebook-app-latest-erwi.onrender.com/)
 
 
+### Demo Video
+
+<video width="100%" controls>
+  <source src="https://private-user-images.githubusercontent.com/143873372/375789660-c9e54962-182f-478f-8f46-6a2deadb1f86.mp4?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjg2NTcxNTMsIm5iZiI6MTcyODY1Njg1MywicGF0aCI6Ii8xNDM4NzMzNzIvMzc1Nzg5NjYwLWM5ZTU0OTYyLTE4MmYtNDc4Zi04ZjQ2LTZhMmRlYWRiMWY4Ni5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDExJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAxMVQxNDI3MzNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04YTNkY2U2MDIyZDQ3MjBjNWNhYTIzYWJiMWFkZmQ2MjcyZDViYjU1ZTBiYzNmZjQ4YTEwMzExNWYzOTQ5ZTI0JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.2-QUEFtHLybPu_CZqXbRErYBYItnoZfX8JzCtfKRj-Q" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
+
 This project is a social networking web application built with **Java** and **Spring Boot**, allowing users to interact through posts, comments, and likes. It is designed to manage user sessions and provide a user-friendly interface for engaging with content.
 
 ## Features
