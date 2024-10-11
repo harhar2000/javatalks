@@ -1,148 +1,144 @@
-# Acebook
+# JavaTalks
 
-The application uses:
-  - `maven` to build the project
-  - `thymeleaf` for templating
-  - `flyway` to manage `postgres` db migrations
-  - `selenium` for feature testing
-  - `faker` to generate fake names for testing
-  - `junit4` for unit testing
-  - `auth0` and `spring-security` for authentication and user management
-  
-Below, you'll find specific learning objectives for each tool.
+### Deployed Link ``` https://jacebook-app-latest-erwi.onrender.com/```
 
-## QuickStart Instructions
+This project is a social networking web application built with **Java** and **Spring Boot**, allowing users to interact through posts, comments, and likes. It is designed to manage user sessions and provide a user-friendly interface for engaging with content.
 
-- Fork and clone this repository to your machine
-- Open the codebase in an IDE like InteliJ or VSCode
-- Create a new Postgres database called `acebook_springboot_development`
-- Install Maven `brew install maven`
-- [Set up Auth0](https://journey.makers.tech/pages/auth0) (you only need the "Create an Auth0 app" section)
-  - NOTE: Each member of the team will need their own Auth0 app
-- Build the app and start the server, using the Maven command `mvn spring-boot:run`
-> The database migrations will run automatically at this point
-- Visit `http://localhost:8080/` to sign up
+## Features
 
-## Extending User Sign Up
+- **User Registration**: New users can register and be saved into the database.
+- **User Login & Sessions**: Session management ensures that user sessions are handled securely.
+- **Posts Management**: Users can create and view posts.
+- **Commenting System**: Users can add comments to posts and delete their comments.
+- **Likes**: Users can like posts.
+- **Navigation**: Simple navigation for users to browse different sections of the app.
 
-The second migration creates a `users` table but, to start with, noting is ever put in there - when a user signs up via Auth0, a record is created in a table that Auth0 'owns' in the cloud. But, if you want your `Post`s to have authors (a one to many relationship between `users` and `posts`) you'll need your own record of each user.
+## Project Structure
 
-It's not necessary to do this from the start but, once you're ready to implement the one to many relationship...
+The project follows a typical Java Spring Boot structure. Below is an overview of the main directories and files:
 
-1. Install localtunnel `npm install -g localtunnel`
-2. Choose a subdomain, perhaps one based on your team's name. It needs to be unique!
-3. Get a public URL for your app `lt --port 8080 --subdomain <your-subdomain>`
-4. Go to your Auth0 account and choose `Actions` on the left sidebar, then `Flows`
-5. Choose `Post User Registtration` from the main page body
-6. Click `+` next to `Add Action` and then, from the menu, choose `Build from scratch`
-7. On the pop up form..
-   - Give your action a sensible name
-   - The trigger should be set to `Post User Registration`
-   - The runtime should be set to `Node 18`
-   - Click `Create`
-8. Paste in the code below, then click `Deploy`
-9. Finally, go to your Auth0 application settings to update `Allowed Callback Urls` and `Allowed Logout URLs` with your new localtunnel URLs.
+### `src/main/java/com/makersacademy/acebook`
 
-#### What your updated Auth0 URLs might look like
+- **config**:
+    - `SecurityConfiguration.java`: Handles security and authentication configurations.
+- **controller**:
+    - `CommentController.java`: Manages creating and deleting comments.
+    - `HomeController.java`: Handles requests for the home page.
+    - `LikesController.java`: Manages like actions on posts.
+    - `NavbarController.java`: Manages the navigation bar and its interactions.
+    - `PostLoginController.java`: Handles actions post-login.
+    - `PostsController.java`: Manages creating, displaying, and interacting with posts.
+    - `SessionController.java`: Manages session checks to ensure user authentication.
+    - `UsersController.java`: Handles user registration and user-related operations.
+- **model**:
+    - `Comment.java`: Represents the comment entity.
+    - `Like.java`: Represents the like entity.
+    - `Post.java`: Represents the post entity.
+    - `User.java`: Represents the user entity.
+- **repository**:
+    - `CommentRepository.java`: Data access for `Comment` entities.
+    - `LikeRepository.java`: Data access for `Like` entities.
+    - `PostRepository.java`: Data access for `Post` entities.
+    - `UserRepository.java`: Data access for `User` entities.
 
-![An image of the Auth0 fields for updating callback and logout URLs](/images/updated_urls.png)
+### `src/main/resources`
 
-#### Post User Registration Code
+- **db/migration**:
+    - Contains SQL scripts for database migrations:
+        - `V1_init.sql`: Initial database setup.
+        - `V2_create_users_table.sql`: Creates the users table.
+        - `V3_add_timestamp_column.sql`: Adds a timestamp column to tables.
+        - `V4_no_nulls.sql`: Ensures no null values for critical fields.
+        - `V5_add_user_id_to_posts.sql`: Adds user IDs to the posts.
+        - `V6_likes_table.sql`: Creates the likes table.
+        - `V7_create_comments_table.sql`: Creates the comments table.
+- **static**:
+    - **images**: Contains images for the application.
+    - `main.css`: Stylesheet for the application.
+- **templates**:
+    - **fragments**:
+        - `confirmation.html`, `confirmation_comment.html`: Confirmation messages.
+        - `edit.html`, `edit_comment.html`: Templates for editing posts and comments.
+        - `footer.html`, `new_comment.html`, `postcards.html`: UI elements.
+    - **posts**:
+        - `index.html`: Home page for posts with a list of posts and forms for creating and commenting on posts&#8203;:contentReference[oaicite:0]{index=0}.
+        - `feed.html`: Displays a central feed of posts with functionality for adding and editing posts and comments&#8203;:contentReference[oaicite:1]{index=1}.
+        - `friends.html`: Manages friend interactions, displaying a list of friends&#8203;:contentReference[oaicite:2]{index=2}.
+        - `my-posts.html`: Shows posts made by the logged-in user, providing a personalised view&#8203;:contentReference[oaicite:3]{index=3}.
+        - `navbar.html`: Contains the navigation bar with links to the feed, friends, my posts, and profile pages&#8203;:contentReference[oaicite:4]{index=4}.
+        - `profile.html`: Displays user profile information and related actions&#8203;:contentReference[oaicite:5]{index=5}.
 
-```js
-exports.onExecutePostUserRegistration = async (event, api) => {
-  fetch("https://<your-domain>.loca.lt/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: event.user.email
-      })
-    }
-  )
-};
-```
+### `src/test/java/com/makersacademy/acebook`
 
-![An image showing the JS code that is used in the post user registration action](/images/post_user_registration.png)
+- Contains test cases for the application, ensuring each feature works as expected.
 
-Now, when a user signs up, an HTTP request will be sent to your locally running app and a user will be added to your local database whenever someone signs up. Test this by signing up then looking at the contents of your local `users` table.
+### `pom.xml`
 
-> NOTE: As mentioned above, each member of the team needs their own Auth0 app and they'll each need to do the above set up for `users`.
+- Project Object Model file for managing dependencies using Maven.
 
-## Running the tests
+### `Dockerfile`
 
-- Install chromedriver using `brew install chromedriver`
-- Start the server in a terminal session `mvn spring-boot:run`
-- Open a new terminal session and navigate to the Acebook directory
-- Run your tests in the second terminal session with `mvn test`
+- Configuration for containerising the application using Docker.
 
-> All the tests should pass. If one or more fail, read the next section.
+### `.gitignore`
 
-## Common Setup Issues
+- Specifies files and directories that should be ignored by Git.
 
-### The application is not running
+## Getting Started
 
-For the feature tests to execute properly, you'll need to have the server running in one terminal session and then use a second terminal session to run the tests.
+### Prerequisites
 
-### Chromedriver is in the wrong place
+- **Java 17** or higher
+- **Spring Boot 3.x**
+- **Maven** for dependency management
 
-Selenium uses Chromedriver to interact with the Chrome browser. If you're on a Mac, Chromedriver needs to be in `/usr/local/bin`. You can find out where it is like this `which chromedriver`. If it's in the wrong place, move it using `mv`.
+### Setup & Run
 
-### Chromedriver can't be opened
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/harhar2000/acebook.git
+    cd acebook
+    ```
 
-Your Mac might refuse to open Chromedriver because it's from an unidentified developer. If you see a popup at that point, dismiss it by selecting `Cancel`, then go to `System Preferences`, `Security and Privacy`, `General`. You should see a message telling you that Chromedriver was blocked and, if so, there will be an `Open Anyway` button. Click that and then re-try your tests.
+2. **Build the project**:
+    ```bash
+    mvn clean install
+    ```
 
-## Existing features
+3. **Run the application**:
+    ```bash
+    mvn spring-boot:run
+    ```
 
-This app already has a few basic features
-* A user can sign up using Auth0
-* A signed up user can sign in
-* A signed in user can create posts at `/posts`
-* A signed in user can sign out at `/logout`
+4. Access the application at `http://localhost:8080`.
 
-## Design
+### API Endpoints
 
-This app uses the repository pattern. The repository pattern separates the business logic of models from the responsibility of connecting to the database and making queries. Take a look in the `src/main/java/repository` and you'll find `PostRepository` which generates and executes queries to Create, Read, Update and Delete (CRUD) posts. Depending on what you've built in the past, it might or might not feel familiar to you.
+- **User Registration**: `POST /users`
+- **Check Session**: `GET /check-session`
+- **Create Post**: `POST /posts`
+- **Create Comment**: `POST /comments`
+- **Delete Comment**: `DELETE /comments/{comment_id}`
+- **Like Post**: `POST /likes`
 
-## Initial learning goals
+## Technologies Used
 
-You don't need an in-depth knowledge of each dependency listed above. Once you can tick off these learning goals,
-you're ready to dive in.  It's assumed that you can already TDD the Takeaway Challenge, or something of similar
-complexity, in Java. It's OK if you need to pause here with Acebook and learn how to do that now :)
+- **Java** & **Spring Boot**: Backend framework for building RESTful services.
+- **Spring Security**: For handling user authentication and authorisation.
+- **H2 Database**: In-memory database for quick setup and testing.
+- **Thymeleaf**: Template engine for rendering HTML pages.
+- **Maven**: Dependency management.
 
-### Maven
-- [ ] I can explain what pom.xml is for
-- [ ] I can start the app using Maven
+## Contributing
 
-### Thymeleaf
-- [ ] I can explain the code in `posts/index.html`
-- [ ] I can plan a new template that could be used for editing a post
+Contributions are welcome! Please follow these steps:
 
-### Flyway
-- [ ] I can explain what a migration is
-- [ ] I can explain when migrations are run
-- [ ] I can explain the code in the two migration files in this directory `/db/migration/`
-- [ ] I can explain the naming convention for flyway migration files
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -m 'Add your feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
 
-### Selenium
-- [ ] I can explain the code in `SignUpTest.java`
-- [ ] I can write a new feature test for unsuccessful sign up
+---
 
-### Faker
-- [ ] I can explain what Faker does
-- [ ] I can explain why it's useful
-
-### JUnit4
-- [ ] I can explain the code in `PostTest.java`
-- [ ] I could add more test cases to `PostTest.java`
-
-### The repository pattern
-- [ ] I can explain the repository pattern
-
-### SpringBoot
-- [ ] I can diagram how this SpringBoot application handles `GET "/posts"`
-
-### Spring Security and Auth0
-- [ ] I can explain how this app is secured
-
+Feel free to reach out if you have any questions or suggestions!
